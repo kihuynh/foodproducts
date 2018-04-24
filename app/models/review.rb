@@ -3,7 +3,7 @@ class Review < ActiveRecord::Base
 
   validates :author, :presence => true
   validates :author, :uniqueness => true
-  validates :content_body, :presence => true
-  validates :rating, :presence => true
+  validates :content_body, :presence => true, length: { minimum: 50 }
+  validates :rating, :presence => true, :numericality => true
 
 end
