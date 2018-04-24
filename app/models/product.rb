@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
   validates :name, :presence => true
 
 scope :most_reviews, -> {(
-  select("products.id, products.name, products.image, products.countryoforigin, products.cost, count(reviews.id) as reviews_count")
+  select("products.id, products.name, products.origin, products.cost, count(reviews.id) as reviews_count")
   .joins(:reviews)
   .group("products.id")
   .order("reviews_count DESC")
@@ -11,16 +11,16 @@ scope :most_reviews, -> {(
   )}
 
 scope :id_sort, -> {(
-  select("products.id, products.name, products.image, products.countryoforigin, products.cost")
+  select("products.id, products.name, products.origin, products.cost")
   .group("products.id")
   .order("products.id DESC")
   .limit(3)
   )}
 
-scope :usa_origin, -> {(
-  select("products.id, products.name, products.image, products.countryoforigin, products.cost")
+scope :usa_only, -> {(
+  select("products.id, products.name, products.origin, products.cost")
   .group("products.id")
-  .where("products.countryoforigin = 'USA'")
+  .where("products.origin = 'USA'")
   .order("products.id DESC")
   )}
 end
