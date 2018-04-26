@@ -1,7 +1,7 @@
 <% if object.errors.any? %>
   <h3>Oops! Something happened. Try again!</h3>
   <ul>
-    <% @product.errors.full_messages.each do |message| %>
+    <% object.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
